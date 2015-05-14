@@ -1,0 +1,55 @@
+<div ng-controller="PublisherController">
+
+    <!-- Fix async video-player directive -->
+    <div ng-if="stream_live">
+        <div video-player>
+        </div>
+        <pre>
+        {{data | json}}
+    </pre>
+    </div>
+    <h3>User: {{user.name}}</h3>
+    <h4>
+        <span class="warning">Stream status:</span> 
+        <span ng-if="!stream_live">
+            Offline
+        </span>
+        <span ng-if="stream_live">
+            Live
+        </span>
+    </h4>
+    <div ng-if="noUser">
+        <h1>This user doesn't exist</h1>
+    </div>
+    <ul>
+        <li>User token: {{user.token}}</li>
+        <li>
+            Ingest stream address:
+            <span>rtmp://localhost:1935/src/{{user.name}}?streamh={{user.token}}</span>
+        </li>
+        <li ng-if="user.playerOptions.rtmpHls">Delivery option:
+
+            <span>RTMP and HLS delivery</span>
+        </li>
+    </ul>
+    </p>
+    <h4>User settings</h4>
+    <ul>
+        <li>
+            <a href="#/update">Update user details</a>
+        </li>
+        <li>
+            <input type="button" class="btn btn-warning" value="Generate new token" />
+        </li>
+        <li>
+            <input type="button" class="btn btn-warning" value="RTMP and HLS delivery" />
+        </li>
+        <li>
+            <input type="button" class="btn btn-warning" value="Enable Live Stream" />
+        </li>
+        <li>
+            <button class="btn btn-warning" wng-click="logout()">Logout</button>
+        </li>
+    </ul>
+    <a href="#/channels">See all channels</a>
+</div>

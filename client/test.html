@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="testing">
+
+<head>
+    <script data-require="angular.js@1.4.0-rc.0" data-semver="1.4.0-rc.0" src="https://code.angularjs.org/1.4.0-rc.0/angular.js"></script>
+    <script data-require="angular-resource@1.4.0-rc.0" data-semver="1.4.0-rc.0" src="https://code.angularjs.org/1.4.0-rc.0/angular-resource.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" charset="utf-8">
+        angular.module('testing', ['ngResource'])
+            .controller('MyCtrl', function($resource)
+            {
+                var myResource = $resource("/users/:id",
+                {
+                    id: '@id'
+                },
+                {
+                    update:
+                    {
+                        method: "PUT"
+                    }
+                });
+
+                var updateData = new myResource();
+                updateData.name = "cat";
+                updateData.email = "cat@gmail.com";
+                updateData.$update({},function(data)
+                {
+                    $scope.data = data;
+                });
+
+            });
+    </script>
+</head>
+
+<body ng-controller="MyCtrl">
+    <h1>Hello Plunker!</h1>
+</body>
+
+
+</html>

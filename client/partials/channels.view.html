@@ -1,0 +1,16 @@
+<h1>Available users</h1>
+<ul>
+    <li ng-repeat="singleUser in allUsers">
+        <a href="#/user/{{singleUser.name}}">{{singleUser.name}}</a>
+        <span ng-if="singleUser.live">Live</span>
+    </li>
+</ul>
+<div ng-if="userTrue">
+    <h3>Publisher: {{user.name}}</h3>
+    <a href="#/publisher">Publisher Settings</a>
+    <br />
+    <button ng-click="logout()">Logout</button>
+</div>
+<div ng-if="!userTrue">
+    <a href="#/login">Login</a>
+</div>

@@ -1,0 +1,48 @@
+    <h1>Contact List APp</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Action</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" class="form-controll" ng-model="contact.name" />
+                </td>
+                <td>
+                    <input type="text" class="form-controll" ng-model="contact.email" />
+                </td>
+                <td>
+                    <input type="text" class="form-controll" ng-model="contact.number" />
+                </td>
+                <td>
+                    <button ng-click="addContacts()" class="btn btn-primary">Add Contact</button>
+                </td>
+                <td>
+                    <button ng-click="update()" class="btn btn-info">Update</button>
+                    &nbsp;
+                    <button class="btn btn-info" ng-click="deselect()">Clear</button>
+                </td>
+            </tr>
+            <tr ng-repeat="contact in contactlist">
+                <td>{{contact.name}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.number}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button>
+                </td>
+                <td>
+                    <button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+<button ng-click="logout()">Logout</button>
+<a href="#/login" ng-click="logout()">Logout link</a>

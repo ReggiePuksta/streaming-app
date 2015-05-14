@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>VideoJS test</title>
+    <!-- <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet"> -->
+    <!-- <link href="./video-js.min.css" rel="stylesheet"> -->
+    <!-- <script src="./video.js"></script> -->
+    <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    <!-- <script src="http://vjs.zencdn.net/4.12/video.js"></script> -->
+    <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+    <script src="./lib/videojs-media-sources.js"></script>
+    <script src="./lib/videojs.hls.min.js"></script>
+</head>
+
+<body>
+    <br />
+
+    <video id="video1" preload="auto" controls class="video-js vjs-default-skin" width="320" height="240">
+        <!-- <source src="http://10.42.0.1:8089/hls/hello.m3u8" type="application/x-mpegURL" -->
+        <!-- media="" /> -->
+
+    </video>
+
+    <script type="text/javascript" charset="utf-8">
+        //var video = document.getElementById('video');
+         //var source = document.createElement('source');
+
+         //source.setAttribute('src',
+         //    'http://10.42.0.1:8089/hls/myStream.m3u8'
+         //);
+         //source.setAttribute('type', 'application/x-mpegURL');
+
+         // source.setAttribute('src', './manage.mp4');
+         // source.setAttribute('type', 'video/mp4');
+         // source.setAttribute('src',
+         //    './sytem.mp4'
+         // );
+         //video.appendChild(source);
+         // video.play();
+
+        videojs('video1').ready(function()
+        {
+            var myPlayer = this;
+            myPlayer.pause();
+            myPlayer.src(
+            {
+                type: 'application/x-mpegURL',
+                src: 'https://flashls-test.s3.amazonaws.com/22402/playlist.m3u8'
+                //src: 'http://10.42.0.1:8089/hls/hello.m3u8'
+
+                //type: "rtmp/mp4",
+                //src: 'rtmp://127.0.0.1:1935/src/hello'
+            });
+
+            myPlayer.load();
+           // myPlayer.play();
+        });
+    </script>
+    <video id="videos" height="240" width="320" class="video-js vjs-default-skin" preload="auto"
+    autoplay controls>
+        <!-- <source src="./manage.mp4" type="video/mp4" /> -->
+        <source src="http://10.42.0.1:8089/hls/hello.m3u8" type="application/x-mpegURL">
+    </video>
+    <!-- <script type="text/javascript" charset="utf-8"> -->
+    <!--     //videojs.options.flash.swf = './lib/video-js.swf'; -->
+    <!--     videojs("videos").ready(function() -->
+    <!--     { -->
+    <!--         var myPlayer = this; -->
+    <!--         // myPlayer.duration(600); -->
+    <!--         // myPlayer.removeClass('vjs-live-display'); -->
+    <!--         // myPlayer.currentTime(120); -->
+    <!--         // myPlayer.play(); -->
+    <!--     }); -->
+    <!-- </script> -->
+</body>
+
+</html>
