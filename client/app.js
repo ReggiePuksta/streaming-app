@@ -12,7 +12,7 @@ angular.module('myApp', ['myApp.controllers', 'myApp.services', 'ui.router', 'ng
     ])
     .config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/login");
+            $urlRouterProvider.otherwise("/channels");
             $stateProvider
                 .state('login', {
                     url: '/login',
