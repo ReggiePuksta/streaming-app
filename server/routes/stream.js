@@ -7,6 +7,7 @@ var StreamData = require('../models/stream-data.js');
 var request = require('../services/getXmlToJson.js');
 var http = require('http');
 
+// Make Data requests from the stream server
 setInterval(function() {
     request.getXmlToJson(function(result) {
         StreamData.update({
@@ -37,8 +38,13 @@ router.get('/stream_data/:username', function(req, res, next) {
         },
         function(err, doc) {
             if (err) return next(err);
-            console.log(doc);
-            res.json(doc.src[0]);
+            if (doc && doc.src) {
+                res.json(doc.src[0]);
+            } else {
+                res.json({
+                    "error": "no available strea data"
+                });
+            }
         });
 });
 
@@ -66,11 +72,11 @@ router.get('/check_live/:user', function(req, res) {
     });
 });
 
-// Nginx stream validation "on_publish" 
+// Nginx stream validation "on_publish"
 router.post('/stream_start', function(req, res) {
     // get RTMP stream name from the request body
     var userStream = req.body.name;
-    // streamh value is 
+    // streamh value is
     var token = req.body.streamh;
     // validate RTMP token
     if (!token && token.length !== 16) {

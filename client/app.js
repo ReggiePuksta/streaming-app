@@ -18,19 +18,6 @@ angular.module('myApp', ['myApp.controllers', 'myApp.services', 'ui.router', 'ng
                     url: '/login',
                     templateUrl: "partials/login.html",
                     controller: 'LoginController'
-                }).state('contacts', {
-                    url: '/contacts',
-                    templateUrl: 'partials/contact-list.html',
-                    controller: 'ContactController',
-                    resolve: {
-                        user: ['authService', '$q',
-                            function(authService, $q) {
-                                return authService.user || $q.reject({
-                                    unAuthorized: true
-                                });
-                            }
-                        ]
-                    }
                 })
                 .state('channels', {
                     url: '/channels',
@@ -45,7 +32,16 @@ angular.module('myApp', ['myApp.controllers', 'myApp.services', 'ui.router', 'ng
                 .state('publisher', {
                     url: '/publisher',
                     templateUrl: 'partials/publisher.view.html',
-                    controller: 'PublisherController'
+                    controller: 'PublisherController',
+                    resolve: {
+                        user: ['authService', '$q',
+                            function(authService, $q) {
+                                return authService.user || $q.reject({
+                                    unAuthorized: true
+                                });
+                            }
+                        ]
+                    }
                 })
                 .state('register', {
                     url: '/signup',

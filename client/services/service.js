@@ -18,11 +18,12 @@ angular.module('myApp.services', ['ngResource'])
                     return auth.user;
                 });
             };
-            auth.logout = function() {
+            auth.logout = function(cb) {
                 return $http.post(LOGOUT_ENDPOINT)
                     .then(function(res) {
                         auth.user = undefined;
                         $cookieStore.remove('user');
+                        cb();
                     });
             };
             return auth;

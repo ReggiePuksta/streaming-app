@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Contacts = require('./contacts.js');
 
 var validateEmail = function(email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -54,11 +53,7 @@ var userSchema = mongoose.Schema({
             type: Boolean,
             default: true
         }
-    },
-    contacts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Contacts'
-    }]
+    }
 });
 
 userSchema.statics.findByUser = function(name, cb) {

@@ -17,9 +17,6 @@ exports.getXmlToJson = function(onResult) {
         port: '8089',
         path: '/stat',
         method: 'GET'
-            // headers: {
-            //     'Content-Type': 'application/xml'
-            // }
     };
 
     var req = http.request(options, function(res) {

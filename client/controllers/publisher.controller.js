@@ -2,7 +2,7 @@ angular.module('myApp.controllers')
     .controller('PublisherController', ['$scope', '$stateParams', 'User', '$rootScope', '$cookieStore', '$sce', '$http',
         function($scope, $stateParams, User, $rootScope, $cookieStore, $sce, $http) {
 
-            var user = $scope.user = $cookieStore.get('user').name.toLowerCase();
+            var user = $cookieStore.get('user').name.toLowerCase();
             // var user = $stateParams.user;
             var userUrlPlayer = 'http://localhost:8089/hls/' + user + '.m3u8';
             $scope.hls = userUrlPlayer;
@@ -12,6 +12,7 @@ angular.module('myApp.controllers')
             $http.get('/stream_data/' + user)
                 .then(function(res, status) {
                     $scope.data = res.data;
+                    console.log(res.data);
                 });
             $http.get('/users/' + user)
                 .then(function(res, status) {

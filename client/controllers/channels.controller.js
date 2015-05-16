@@ -12,10 +12,14 @@ angular.module('myApp.controllers')
             if ($cookieStore.get('user') && $cookieStore.get('user').name) {
                 var user = $scope.user = $cookieStore.get('user').name.toLowerCase();
                 $scope.userTrue = true;
-                // How to dispose?
                 $scope.logout = function() {
-                    authService.logout();
-                    state.go('channels');
+                    authService.logout(function() {
+                        // Reload the state
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
+                    });
+                    // state.go('channels');
                 };
 
             }

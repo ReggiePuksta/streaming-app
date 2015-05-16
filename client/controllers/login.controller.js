@@ -30,7 +30,7 @@ angular.module('myApp.controllers')
             //         console.log(data);
             //         if (data) {
             //             $rootScope.user = data;
-            //             $state.go('contacts');
+            //             $state.go('register');
             //         }
             //     });
             //     console.log($scope.user);

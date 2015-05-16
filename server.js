@@ -3,7 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/mean_tut');
-var apiContactList = require('./server/routes/contacts.js');
 var apiUsers = require('./server/routes/users.js');
 var apiStream = require('./server/routes/stream.js');
 var passport = require('passport');
@@ -67,7 +66,6 @@ passport.use(new LocalStrategy(function(email, password, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/contactlist', apiContactList);
 app.use('/users', apiUsers);
 app.use('/', apiStream);
 

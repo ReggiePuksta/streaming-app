@@ -60,7 +60,7 @@ var User = require('../models/users.js');
         });
     });
 
-    // PUT, update contact
+    // PUT, update user
     // Has to be protected
     router.put('/:user', function(req, res, next) {
         console.log("PUT request received");
@@ -92,7 +92,7 @@ var User = require('../models/users.js');
     });
 
     // API error handler
-    router.use('/contactlist', function(err, req, res, next) {
+    router.use('/', function(err, req, res, next) {
         res.status(err.status || 400);
         var errorMessages = [];
 
