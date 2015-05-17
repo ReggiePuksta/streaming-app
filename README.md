@@ -13,7 +13,7 @@ To install application:
  Ffmpeg compilation:
  https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
  
- configuration.js is required to set according to your system.
+ configuration.js filed is used to set-up according to your system.
  db: MongoDB url
  nginxStats: Nignx RTMP statistics URL object
  
