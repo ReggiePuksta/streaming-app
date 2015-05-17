@@ -3,9 +3,11 @@
 This Live-streaming application is built around the MEAN stack. It was designed to be integrated with NGINX-RTMP module and Ffmpeg video transcoder. Front-end uses VideoJS HTML5 player to display RTMP and HLS streams.
 
 To install application:
- `git clone https://github.com/ReggiePuksta/streaming-app`
- `cd streaming-app`
- `npm install`
+ ```
+ git clone https://github.com/ReggiePuksta/streaming-app
+ cd streaming-app
+ npm install
+ ```
  
  Nginx-RTMP:
  https://github.com/arut/nginx-rtmp-module/wiki/Getting-started-with-nginx-rtmp
