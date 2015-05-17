@@ -15,6 +15,16 @@
     padding: 30px 20px 10px 15px;
     border: 1px solid #ccc;
 }
+.box-css2 {
+    margin-top: 10px;
+    padding: 30px 20px 10px 15px;
+    border: 1px solid #ccc;
+}
+.border-light {
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
 h1 {
     text-align: center;
 }
@@ -24,14 +34,13 @@ h1 {
 a:hover {
     text-decoration: none;
 }
-
 .cell {
     line-height: 30px;
 }
-
 /**
  * Helper CSS 
  **/
+
 .no-margin {
     margin: 0px;
 }
@@ -42,6 +51,6 @@ a:hover {
 .no-margin-bot {
     margin-bottom: 0px;
 }
-.vert{
-    vertical-align:middle;
+.vert {
+    vertical-align: middle;
 }

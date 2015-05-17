@@ -10,7 +10,7 @@ angular.module('myApp.controllers')
 
             // Get User data
             if ($cookieStore.get('user') && $cookieStore.get('user').name) {
-                var user = $scope.user = $cookieStore.get('user').name.toLowerCase();
+                var user = $scope.user = $cookieStore.get('user').name;
                 $scope.userTrue = true;
                 $scope.logout = function() {
                     authService.logout(function() {
@@ -19,7 +19,6 @@ angular.module('myApp.controllers')
                             reload: true
                         });
                     });
-                    // state.go('channels');
                 };
 
             }

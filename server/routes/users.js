@@ -23,7 +23,7 @@ var User = require('../models/users.js');
         console.log("We received POST request");
         // Todo implement token generator
         // var token = generateToken();
-        var token = '1234567891123456';
+        var token = Math.floor((Math.random() * Math.pow(10, 16)));
         User.create({
             name: req.body.name,
             email: req.body.email,

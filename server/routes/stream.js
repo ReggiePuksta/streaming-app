@@ -7,7 +7,7 @@ var StreamData = require('../models/stream-data.js');
 var request = require('../services/getXmlToJson.js');
 var http = require('http');
 
-// Make Data requests from the stream server
+// Make Data requests every 10 seconds from the stream server
 setInterval(function() {
     request.getXmlToJson(function(result) {
         StreamData.update({
@@ -26,7 +26,86 @@ setInterval(function() {
                 }
             });
     });
-}, 5000);
+}, 10000);
+
+router.put('/token', function(req, res, next) {
+    User.findByUser(req.user.name, function(err, doc) {
+        if (err) return res.status(500).json({
+            err: "server error"
+        });
+        if (!doc) {
+            return res.json({
+                err: "No user"
+            });
+        }
+        doc.token = Math.floor((Math.random() * Math.pow(10, 16)));
+        doc.save(function(err, doc2) {
+            if (err) {
+                return res.json({
+                    error: "ERROR while saving user"
+                });
+            }
+            res.json({
+                token: doc2.token
+            });
+
+        });
+    });
+});
+
+// Publisher option to dissable live-streaming
+router.put('/enable_live', function(req, res, next) {
+    User.findByUser(req.user.name, function(err, doc) {
+        if (err) return res.status(500).json({
+            err: "Server error"
+        });
+        if (!doc) {
+            return res.json({
+                err: "No user"
+            });
+        }
+        // Set new values
+
+        doc.stream_user_enabled = !doc.stream_user_enabled;
+        doc.save(function(err, doc2) {
+            if (err) {
+                return res.json({
+                    error: "Failed to save user data"
+                });
+            }
+            res.json({
+                streamLive: doc2.stream_user_enabled
+            });
+        });
+    });
+});
+
+// Publisher option to enable/dissable rtmpHls delivery
+router.put('/rtmp_hls', function(req, res, next) {
+    console.log("RTMP HLS request");
+    User.findByUser(req.user.name, function(err, doc) {
+        if (err) return res.status(500).json({
+            err: "Server error"
+        });
+        if (!doc) {
+            return res.json({
+                err: "No user"
+            });
+        }
+        // Set new values
+        doc.playerOptions.rtmpHls = !doc.playerOptions.rtmpHls;
+        doc.save(function(err, doc2) {
+            if (err) {
+                return res.json({
+                    error: "Failed to save user data"
+                });
+            }
+            res.json({
+                rtmpHls: doc2.playerOptions.rtmpHls
+            });
+        });
+    });
+});
 
 // Get RTMP stream stats
 router.get('/stream_data/:username', function(req, res, next) {
@@ -47,6 +126,7 @@ router.get('/stream_data/:username', function(req, res, next) {
             }
         });
 });
+
 
 // Checks if user is live
 router.get('/check_live/:user', function(req, res) {
@@ -72,7 +152,7 @@ router.get('/check_live/:user', function(req, res) {
     });
 });
 
-// Nginx stream validation "on_publish"
+// Nginx ingest stream validation "on_publish"
 router.post('/stream_start', function(req, res) {
     // get RTMP stream name from the request body
     var userStream = req.body.name;
@@ -109,7 +189,7 @@ router.post('/stream_start', function(req, res) {
 
 });
 
-// Protect from other users accessing it,
+// Needs to be protected from other users accessing it,
 // only media server is allowed to access this.
 router.post('/stream_end', function(req, res) {
     var userStream = req.body.name;
@@ -117,20 +197,15 @@ router.post('/stream_end', function(req, res) {
 
     // implement findByUserTokenName search
     User.findByUser(userStream, function(err, doc) {
-        console.log("We are looking for the user");
         if (err) return res.status(500).end();
-        console.log("Our document is like this:");
-        console.log(doc);
         if (doc) {
             doc.update({
                 stream_live: false
             }, function(err) {
                 if (err) return res.status(500).end();
-                console.log("Successfully ended");
                 return res.status(200).end();
             });
         } else {
-            console.log("doc was not found");
             return res.status(401).end();
         }
     });

@@ -1,3 +1,9 @@
 .video-js.vjs-default-skin .vjs-big-play-button {
     display: none;
+    margin: auto;
+    padding: auto;
+}
+.centerout{
+    margin: auto;
+    padding: auto;
 }

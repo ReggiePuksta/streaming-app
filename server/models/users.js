@@ -19,6 +19,8 @@ var validateLength = function(len) {
 var userSchema = mongoose.Schema({
     name: {
         type: String,
+        required: true,
+        unique: true
     },
     pass: {
         type: String,
@@ -62,4 +64,9 @@ userSchema.statics.findByUser = function(name, cb) {
     }, cb);
 };
 
+userSchema.methods.validatePassword = function(password) {
+    console.log("PASSWORD");
+    console.log(this.pass);
+    return this.pass == password;
+};
 module.exports = mongoose.model('User', userSchema);

@@ -1,16 +1,22 @@
-<h1>Available users</h1>
-<ul>
-    <li ng-repeat="singleUser in allUsers">
-        <a href="#/user/{{singleUser.name}}">{{singleUser.name}}</a>
-        <span ng-if="singleUser.live">Live</span>
-    </li>
-</ul>
-<div ng-if="userTrue">
-    <h3>Publisher: {{singleUser.name}}</h3>
-    <a href="#/publisher">Publisher Settings</a>
-    <br />
-    <button ng-click="logout()">Logout</button>
+<div class="text-center border-light">
+    <div ng-if="userTrue">
+        <p>Logged in: {{user}} <a class="btn btn-warning" href="#/publisher">Stream configuration</a>
+            <button class="btn btn-default" ng-click="logout()">Logout</button>
+        </p>
+    </div>
+    <div ng-if="!userTrue">
+        Create account to make streams:
+        <a class="btn btn-warning" href="#/login">Login</a>
+        <a class="btn btn-info" href="#/signup">Sign Up</a>
+    </div>
 </div>
-<div ng-if="!userTrue">
-    <a href="#/login">Login</a>
+<div class="text-center border-light">
+    <h2>Available channels</h2>
+    <ul class="list-unstyled">
+        <li ng-repeat="singleUser in allUsers">
+            <a href="#/user/{{singleUser.name}}">{{singleUser.name}}</a>
+            <span class="text-danger" ng-if="singleUser.live">Live</span>
+            <span ng-if="!singleUser.live">Offline</span>
+        </li>
+    </ul>
 </div>

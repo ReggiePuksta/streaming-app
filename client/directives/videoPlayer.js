@@ -53,7 +53,7 @@ angular.module('myApp').directive('videoPlayer', function() {
     return {
         restrict: 'A,E',
         replace: true,
-        template: '<video class="video-js vjs-default-skin">' +
+        template: '<video class="video-js vjs-default-skin centerout">' +
             // '<source ng-src="{{userUrl}}" type="rtmp/mp4"/>'+
             '</video>',
         link: link

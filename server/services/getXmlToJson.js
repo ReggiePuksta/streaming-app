@@ -1,7 +1,7 @@
 var http = require("http");
 var https = require("https");
 var parser = require('xml-stream');
-var saxStream = require('sax').createStream();
+var config = require('../../configuration.js');
 
 /**
  * Based on
@@ -13,9 +13,9 @@ var saxStream = require('sax').createStream();
 exports.getXmlToJson = function(onResult) {
     console.log("from Nginx::getXmlToJson");
     var options = {
-        host: 'localhost',
-        port: '8089',
-        path: '/stat',
+        host: config.nginxStats.host,
+        port: config.nginxStats.port,
+        path: config.nginxStats.path,
         method: 'GET'
     };
 
@@ -36,6 +36,7 @@ exports.getXmlToJson = function(onResult) {
         });
 
 
+        // TESt sax xml parsing
         // xml.on('end', function(data) {
         //     // console.log(JSON.stringify(xml));
         //     onResult(res.statusCode, xml);
