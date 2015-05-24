@@ -39,6 +39,13 @@
     <script src="controllers/user-player.controller.js"></script>
     <script src="controllers/channels.controller.js"></script>
     <script src="controllers/publisher.controller.js"></script>
+    <script>
+      angular.module('myApp')
+      .constant('streamUrls', {
+          "rtmpUrl": {{{rtmpUrl}}},
+          "hlsUrl": {{{hlsUrl}}}
+      });
+    </script>
 
     <!-- VideoJS player -->
     <script src="http://vjs.zencdn.net/4.12/video.js"></script>

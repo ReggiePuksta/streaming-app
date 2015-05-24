@@ -1,0 +1,12 @@
+module.exports = {
+    db: "mongodb://localhost/streaming-app",
+    streamConfig: {
+      rtmpUrl: "10.42.0.1:1935",
+      hlsUrl: "10.42.0.1:80"
+    },
+    nginxStats: {
+        host: "localhost",
+        port: "80",
+        path: "/stat"
+    }
+};

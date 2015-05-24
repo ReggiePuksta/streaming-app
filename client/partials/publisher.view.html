@@ -22,8 +22,9 @@
             <li>User token: {{token}}</li>
             <li>
                 Ingest stream address:
-                <span>rtmp://217.160.94.42:1935/src/{{user.name}}?streamh={{token}}</span>
+                <span>rtmp://{{rtmpUrlHost}}/src/{{user.name}}?streamh={{token}}</span>
             </li>
+            <li>Supported ingest codecs: H264 video and AAC audio.</li>
         </ul>
     </div>
     <h4 ng-if="inputVideo" class="text-center">

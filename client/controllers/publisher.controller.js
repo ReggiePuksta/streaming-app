@@ -1,12 +1,12 @@
 angular.module('myApp.controllers')
-    .controller('PublisherController', ['$scope', '$stateParams', 'User', '$rootScope', '$cookieStore', '$sce', '$http', 'authService', '$state',
-        function($scope, $stateParams, User, $rootScope, $cookieStore, $sce, $http, authService, $state) {
+    .controller('PublisherController', ['$scope', '$stateParams', 'User', '$rootScope', '$cookieStore', '$sce', '$http', 'authService', '$state', 'streamUrls',
+        function($scope, $stateParams, User, $rootScope, $cookieStore, $sce, $http, authService, $state, streamUrls) {
 
             var user = $cookieStore.get('user').name;
-            // var user = $stateParams.user;
-            var userUrlPlayer = 'http://localhost:8089/hls/' + user + '.m3u8';
+            var userUrlPlayer = 'http://' + streamUrls.hlsUrl + '/hls/' + user + '.m3u8';
             $scope.hls = userUrlPlayer;
-            $scope.userUrlPlayerRtmp = 'rtmp://localhost:1935/hls/' + user + '_exhi';
+            $scope.userUrlPlayerRtmp = 'rtmp://' + streamUrls.rtmpUrl + '/hls/' + user + '_exhi';
+            $scope.rtmpUrlHost = streamUrls.rtmpUrl;
             $scope.userUrl = $sce.trustAsResourceUrl(userUrlPlayer);
             $scope.options = {
                 live: {

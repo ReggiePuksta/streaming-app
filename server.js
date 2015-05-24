@@ -13,12 +13,22 @@ var apiUsers = require('./server/routes/users.js');
 var apiStream = require('./server/routes/stream.js');
 
 
+// View engine
+app.set('views','./client');
+app.set('view engine','html');
+app.engine('html', require('hbs').__express);
+
+// Proxying settings
+app.set('trust proxy', true);
+// Enable serving static files with ExpressJS
+// app.use(express.static(__dirname + '/client'));
+
 // Middleware
-app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 app.use(session({
     secret: '$7b$35$.wpd8jhriLDRXwptB8jI.usYsUELftTl/.O42DRuR8T/qtwUb7WEm',
     httpOnly: true,
@@ -35,8 +45,17 @@ app.use(session({
 // Invoke passport authentication
 require('./server/services/passport-auth.js')(app, passport, mongoose);
 
+app.get('/', function(req, res) {
+  console.log(config.streamConfig.rtmpUrl);
+  res.render('index', {
+    rtmpUrl : JSON.stringify(config.streamConfig.rtmpUrl),
+    hlsUrl : JSON.stringify(config.streamConfig.hlsUrl)
+  });
+});
+
 app.use('/users', apiUsers);
 app.use('/', apiStream);
+
 
 app.post('/login', passport.authenticate('local'), function(req, res) {
     res.json(req.user);
