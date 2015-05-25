@@ -1,11 +1,11 @@
 angular.module('myApp.controllers')
-.controller('UserPlayerController', ['$scope', '$stateParams', 'User', '$rootScope', '$cookieStore', '$sce', '$http', 'streamUrl',
-		function($scope, $stateParams, User, $rootScope, $cookieStore, $sce, $http, streamUrl) {
+.controller('UserPlayerController', ['$scope', '$stateParams', 'User', '$rootScope', '$cookieStore', '$sce', '$http', 'streamUrls',
+		function($scope, $stateParams, User, $rootScope, $cookieStore, $sce, $http, streamUrls) {
 		// var user = $cookieStore.get('user').name.toLowerCase();
 		var user = $stateParams.user;
-		var userUrlPlayer = 'http://' + streamUrl.hlsUrl +'/hls/' + user + '.m3u8';
+		var userUrlPlayer = 'http://' + streamUrls.hlsUrl +'/hls/' + user + '.m3u8';
 		$scope.hls = userUrlPlayer;
-		$scope.userUrlPlayerRtmp = 'rtmp://'+streamUrl.rtmpUrl+'/hls/' + user + '_exhi';
+		$scope.userUrlPlayerRtmp = 'rtmp://'+streamUrls.rtmpUrl+'/hls/' + user + '_exhi';
 		$scope.userUrl = $sce.trustAsResourceUrl(userUrlPlayer);
 
 		$http.get('/check_live/' + user)

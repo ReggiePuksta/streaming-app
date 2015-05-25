@@ -21,7 +21,7 @@ app.engine('html', require('hbs').__express);
 // Proxying settings
 app.set('trust proxy', true);
 // Enable serving static files with ExpressJS
-// app.use(express.static(__dirname + '/client'));
+//app.use(express.static(__dirname + '/client'));
 
 // Middleware
 app.use(bodyParser.json());
