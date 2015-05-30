@@ -7,6 +7,7 @@ To install application:
  git clone https://github.com/ReggiePuksta/streaming-app
  cd streaming-app
  npm install
+ grunt build
  ```
  
  Nginx-RTMP:
@@ -16,7 +17,10 @@ To install application:
  https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
  
  configuration.js filed is used to set-up according to your system.
- db: MongoDB url
+ db: MongoDB URL
+ streamConfig: 
+   rtmpUrl - RTMP outbound URL from the media server that will be used by VideoJS
+   hlsUrl - HLS outbound URL from the media server that will be used by VideoJS
  nginxStats: Nignx RTMP statistics URL object
  
  Nginx RTMP module has to be installed
