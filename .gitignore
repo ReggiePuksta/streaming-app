@@ -3,3 +3,4 @@ tryouts/
 configuration.js
 public/videos/
 .tmp/
+dist/
