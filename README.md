@@ -16,13 +16,21 @@ To install application:
  Ffmpeg compilation:
  https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
  
- configuration.js filed is used to set-up according to your system.
- db: MongoDB URL
- streamConfig: 
-   rtmpUrl - RTMP outbound URL from the media server that will be used by VideoJS
-   hlsUrl - HLS outbound URL from the media server that will be used by VideoJS
- nginxStats: Nignx RTMP statistics URL object
- 
+ "configuration.js" file is used to set-up according to your system.
+ ```
+ module.exports = {
+    db: "mongodb://localhost/streaming-app", \\ MongoDB URL
+    streamConfig: {
+      rtmpUrl: "10.42.0.1:1935", \\ RTMP outbound URL from the media server that will be used by VideoJS
+      hlsUrl: "10.42.0.1:80" \\ HLS outbound URL from the media server that will be used by VideoJS
+    },
+    nginxStats: { \\ Nignx RTMP statistics URL object
+        host: "localhost", 
+        port: "80",
+        path: "/stat"
+    }
+};
+ ```
  Nginx RTMP module has to be installed
  Suggested Nginx-RTMP configuration:
 ```
