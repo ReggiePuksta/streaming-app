@@ -2,3 +2,4 @@ node_modules/
 tryouts/
 configuration.js
 public/videos/
+.tmp/
