@@ -1,0 +1,7 @@
+{
+    "node": true,
+    "jasmine": true,
+    "globals": {
+        "angular": false
+    }
+}

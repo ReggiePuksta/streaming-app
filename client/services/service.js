@@ -1,8 +1,8 @@
 angular.module('myApp.services', ['ngResource'])
-    .factory('User', function($resource) {
+    .factory('User', ['$resource', function($resource) {
         // Fix resources
         return $resource('/users');
-    })
+    }])
     // User Login and logout service
     .factory('authService', ['AUTH_ENDPOINT', 'LOGOUT_ENDPOINT', '$http', '$cookieStore',
         function(AUTH_ENDPOINT, LOGOUT_ENDPOINT, $http, $cookieStore) {

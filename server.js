@@ -13,15 +13,10 @@ var apiUsers = require('./server/routes/users.js');
 var apiStream = require('./server/routes/stream.js');
 
 
-// View engine
-app.set('views','./client');
-app.set('view engine','html');
-app.engine('html', require('hbs').__express);
-
 // Proxying settings
 app.set('trust proxy', true);
 // Enable serving static files with ExpressJS
-//app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/dist'));
 
 // Middleware
 app.use(bodyParser.json());

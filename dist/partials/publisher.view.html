@@ -1,0 +1,93 @@
+<div ng-controller="PublisherController">
+    <!-- Fix async video-player directive -->
+    <div ng-if="stream_live">
+        <div video-player>
+        </div>
+    </div>
+    <div class="text-center border-light">
+        <h3>User: {{user.name}}</h3>
+        <h4>
+        <span class="warning">Stream status:</span>
+        <span ng-if="!stream_live">
+            Offline
+        </span>
+        <span class="text-danger" ng-if="stream_live">
+            Live
+        </span>
+    </h4>
+        <div ng-if="noUser">
+            <h1>This user doesn't exist</h1>
+        </div>
+        <ul class="list-unstyled">
+            <li>User token: {{token}}</li>
+            <li>
+                Ingest stream address:
+                <span>rtmp://{{rtmpUrlHost}}/src/{{user.name}}?streamh={{token}}</span>
+            </li>
+            <li>Supported ingest codecs: H264 video and AAC audio.</li>
+        </ul>
+    </div>
+    <h4 ng-if="inputVideo" class="text-center">
+        Stream data
+    </h4>
+    <div class="row border-light text-center" ng-if="inputVideo">
+        <div class="col-sm-3 col-sm-offset-3">
+            <h4>Ingested video:</h4>
+            <ul class="list-unstyled">
+                <li>
+                    Width: {{inputVideo.width}} x {{inputVideo.height}}
+                </li>
+                <li>
+                    Codec: {{inputVideo.codec}}
+                </li>
+                <li ng-if="inputVideo.profile">
+                    Profile: {{inputVideo.profile}}
+                </li>
+                <li ng-if="inputVideo.level">
+                    Level: {{inputVideo.level}}
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-3">
+            <h4>Ingested audio:</h4>
+            <ul class="list-unstyled">
+                <li>
+                    Codec: {{inputAudio.codec}}
+                </li>
+                <li>
+                    channels: {{inputAudio.channels}}
+                </li>
+                <li>
+                    sample rate: {{inputAudio.sample_rate}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="row border-light text-center">
+        <div class="col-sm-12">
+            <h4>User settings</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#/update">Update user details</a>
+                </li>
+                <li>
+                    <button type="button" ng-click="generateToken()" class="btn btn-warning">Generate new token</button>
+                </li>
+                <li>
+                    <button type="button" ng-click="rtmpHlsSwitch()" class="btn btn-{{options.rtmpHls.button}}">{{options.rtmpHls.message}}</button>
+                </li>
+                <li>
+                    <button type="button" ng-click="enableLive()" class="btn btn-{{options.live.button}}">{{options.live.message}}</button>
+                </li>
+                <li>
+                    <button class="btn btn-default" ng-click="logout()">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="#/channels">See all channels</a>
+    </div>
+</div>
